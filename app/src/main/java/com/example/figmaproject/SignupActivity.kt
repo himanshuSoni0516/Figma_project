@@ -45,12 +45,12 @@ class SignupActivity : AppCompatActivity() {
             }
         }
     }
-    fun isValidEmail(email: String): Boolean {
+    private fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[A-Za-z0-9+_.-]+@(.+)$")
         return emailRegex.matches(email)
     }
 
-    fun validatePassword(password: String): Boolean {
+    private fun validatePassword(password: String): Boolean {
         val minLength = 8
         val maxLength = 20
         val hasUppercase = password.any { it.isUpperCase() }
