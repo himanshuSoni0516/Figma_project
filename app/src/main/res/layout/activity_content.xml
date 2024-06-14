@@ -82,44 +82,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText4">
 
-        <LinearLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvContent"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                app:srcCompat="@drawable/edit_imgbg" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Header"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="He'll want to use your yacht, and I don't want this thing smelling like fish."
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="8m ago"
-                android:textColor="#BDBDBD" />
-        </LinearLayout>
-
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:itemCount="5"
+            tools:listitem="@layout/content_item_layout"/>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
