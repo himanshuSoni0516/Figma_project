@@ -6,10 +6,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.figmaproject.adapter.HotDealItemAdapter
+import com.example.figmaproject.adapter.TrendingItemAdapter
 import com.example.figmaproject.databinding.ActivityMarketBinding
+import com.example.figmaproject.model.ProductViewModel
 
 class MarketActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMarketBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,5 +35,21 @@ class MarketActivity : AppCompatActivity() {
         binding.bNi2.setOnClickListener {
             startActivity(Intent(this, CongratulationsActivity::class.java))
         }
+        val hotDealData = ArrayList<ProductViewModel>()
+        for (i in 1..10) {
+            hotDealData.add(ProductViewModel("","item $i","item $i"))
+        }
+        val adapter = HotDealItemAdapter(hotDealData)
+        binding.rvHotDeals.adapter = adapter
+        binding.rvHotDeals.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+
+        val TrendingData = ArrayList<ProductViewModel>()
+        for (i in 1..5) {
+            TrendingData.add(ProductViewModel("","item $i","item $i"))
+        }
+        val adapter2 = TrendingItemAdapter(TrendingData)
+        binding.rvTrending.adapter = adapter2
+        binding.rvTrending.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 }
