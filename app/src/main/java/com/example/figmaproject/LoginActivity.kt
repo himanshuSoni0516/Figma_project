@@ -2,6 +2,7 @@ package com.example.figmaproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.figmaproject.databinding.ActivityLoginBinding
 import com.example.figmaproject.databinding.ActivitySignupBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -23,30 +25,27 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         binding.btnLogin.setOnClickListener {
-            val email = binding.editEmail.text
-            val password = binding.editPassword.text
+            val email = binding.editEmail.text.toString()
+            val password = binding.editPassword.text.toString()
             if (email.isEmpty()) {
                 Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
-            } else if (!isValidEmail(email.toString())) {
+            } else if (!isValidEmail(email)) {
                 Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show()
             } else if (password.isEmpty()) {
                 Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
-            }else if(!validatePassword(password.toString())) {
-                Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show()
-            }else {
-                startActivity(Intent(this, FeedActivity::class.java))
+            } else {
+                loginWithFirebase(email,password)
             }
-
 
         }
     }
 
-    fun isValidEmail(email: String): Boolean {
+    private fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[A-Za-z0-9+_.-]+@(.+)$")
         return emailRegex.matches(email)
     }
 
-    fun validatePassword(password: String): Boolean {
+    private fun validatePassword(password: String): Boolean {
         // Define the password validation rules
         val minLength = 8
         val maxLength = 20
@@ -63,4 +62,28 @@ class LoginActivity : AppCompatActivity() {
         return isValid
     }
 
+    private fun loginWithFirebase(email : String, password: String){
+        setInProgress(true)
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
+            .addOnSuccessListener {
+                setInProgress(false)
+                startActivity(Intent(this@LoginActivity,FeedActivity::class.java))
+                finish()
+            }
+            .addOnFailureListener {
+                setInProgress(false)
+                Toast.makeText(applicationContext,"Login account failed", Toast.LENGTH_SHORT).show()
+            }
+    }
+    private fun setInProgress(inProgress: Boolean) {
+        if (inProgress) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.btnLogin.isEnabled = false
+            binding.btnLogin.alpha = .5f
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.btnLogin.isEnabled = true
+            binding.btnLogin.alpha = 1f
+        }
+    }
 }
