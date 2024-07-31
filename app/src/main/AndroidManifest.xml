@@ -13,10 +13,11 @@
         android:theme="@style/Theme.FigmaProject"
         tools:targetApi="31">
         <activity
+            android:name=".AddFeedActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MarketActivity_2"
             android:exported="false" />

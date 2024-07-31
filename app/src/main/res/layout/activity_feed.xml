@@ -28,7 +28,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="9dp"
-            android:text="Back"
+            android:text="Logout"
             android:textColor="#5DB075" />
 
         <TextView
@@ -157,8 +157,28 @@
                 app:layout_constraintEnd_toStartOf="@+id/bNi2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/rectangle_9" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddFeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/baseline_add_24"
+        android:tint="@color/white"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

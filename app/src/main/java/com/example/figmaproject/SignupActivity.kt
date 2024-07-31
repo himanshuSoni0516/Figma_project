@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.figmaproject.databinding.ActivitySignupBinding
+import com.example.figmaproject.utils.PrefManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -57,6 +58,16 @@ class SignupActivity : AppCompatActivity() {
             }
 
             createAccountWithFirebase(email,password)
+        }
+
+        if (PrefManager(this).isLoggedIn()) {
+            // User is logged in, proceed to the main activity
+            startActivity(Intent(this, FeedActivity::class.java))
+            finish()
+        } else {
+            // User is not logged in, show login screen
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 

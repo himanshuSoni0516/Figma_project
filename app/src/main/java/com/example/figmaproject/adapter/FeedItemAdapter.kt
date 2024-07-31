@@ -15,7 +15,7 @@ class FeedItemAdapter(private val mList: List<FeedViewModel>) : RecyclerView.Ada
 		// that is used to hold list item
 
 		return ViewHolder(FeedItemLayoutBinding.bind(LayoutInflater.from(parent.context).inflate(R.layout.feed_item_layout, parent, false)))
-	} 
+	}
 
 	// binds the list items to a view 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) { 
@@ -23,6 +23,7 @@ class FeedItemAdapter(private val mList: List<FeedViewModel>) : RecyclerView.Ada
 		val itemsViewModel = mList[position]
 
 		holder.txtTitle.text = itemsViewModel.title
+		holder.txtDescription.text = itemsViewModel.decription
 	} 
 
 	// return the number of the items in the list 
@@ -33,6 +34,6 @@ class FeedItemAdapter(private val mList: List<FeedViewModel>) : RecyclerView.Ada
 	// Holds the views for adding it to image and text 
 	class ViewHolder(binding: FeedItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 		val txtTitle = binding.txtTitle
-
+		val txtDescription = binding.txtDescription
 	} 
 }

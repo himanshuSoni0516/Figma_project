@@ -10,7 +10,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.figmaproject.databinding.ActivityLoginBinding
 import com.example.figmaproject.databinding.ActivitySignupBinding
+import com.example.figmaproject.utils.PrefManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -67,8 +70,19 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
             .addOnSuccessListener {
                 setInProgress(false)
-                startActivity(Intent(this@LoginActivity,FeedActivity::class.java))
-                finish()
+                val user = Firebase.auth.currentUser
+                user?.let {
+                    val uid = user.uid
+                    val email = user.email
+                    val prefManager = PrefManager(this)
+                    if (email != null) {
+                        prefManager.saveLoginDetails(uid = uid, email = email)
+                        startActivity(Intent(this@LoginActivity,FeedActivity::class.java))
+                        finish()
+                    }
+
+                }
+
             }
             .addOnFailureListener {
                 setInProgress(false)
