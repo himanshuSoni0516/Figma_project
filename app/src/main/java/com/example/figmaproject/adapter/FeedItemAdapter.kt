@@ -20,9 +20,9 @@ class FeedItemAdapter(private val mList: List<FeedViewModel>) : RecyclerView.Ada
 	// binds the list items to a view 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) { 
 
-		val ItemsViewModel = mList[position] 
+		val itemsViewModel = mList[position]
 
-		holder.txtTitle.text = ItemsViewModel.title
+		holder.txtTitle.text = itemsViewModel.title
 	} 
 
 	// return the number of the items in the list 
